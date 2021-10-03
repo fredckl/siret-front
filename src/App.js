@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { Container, Box, Heading } from '@chakra-ui/react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import EtsList from './components/EtsList';
+import FormSearch from './components/FormSearch';
 
 function App() {
+  const [ets, setEts] = useState([])
+  const [metadata, setMetadata] = useState({});
+  const [page, setPage] = useState(0);
+  const [formValues, setFormValues] = useState(null);
+
+  useEffect(() => {
+    if (formValues) {
+      axios.get('/api/v1/siret', {
+        params: { ...formValues, page }
+    }).then(({ data }) => {
+      setEts(data.data)
+      setMetadata(data.metadata)
+    })
+    }
+  }, [formValues, page])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxW="container.lg" bgColor="gray-200">
+      <Box my="10">
+        <Heading textAlign="center">L.Entreprise</Heading>
+      </Box>
+      <Box mt="5" mb="5">
+        <FormSearch onSubmit={setFormValues} />
+      </Box>
+      <EtsList ets={ets} metadata={metadata}/>
+      
+    </Container>
   );
 }
 
