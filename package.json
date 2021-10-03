@@ -30,7 +30,8 @@
     "start": "react-scripts start",
     "server:dev": "nodemon server/bin/www",
     "server:prod": "node server/bin/www",
-    "build": "react-scripts build",
+    "build:front": "react-scripts build",
+    "build:server": "babel server --out-dir dist --copy-files",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -54,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
     "@babel/register": "^7.15.3",
