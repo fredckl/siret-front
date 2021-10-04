@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/node_modules_all
 /.pnp
 .pnp.js
 
@@ -9,6 +10,7 @@
 /coverage
 
 # production
+/dist
 /build
 
 # misc
