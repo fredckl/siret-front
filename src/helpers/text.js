@@ -1,0 +1,1 @@
+export const pluralize = (text, ext, count) => `${text}${count > 1 ? ext : ''}`;
