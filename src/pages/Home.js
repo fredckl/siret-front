@@ -1,4 +1,4 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, Badge } from '@chakra-ui/react';
 import axios from 'axios';
 import { compose, dec, evolve, has, inc, isEmpty, pickAll, prop, omit } from 'ramda';
 import React, { useEffect, useState } from 'react';
@@ -21,7 +21,7 @@ const Home = () => {
   const searchQueries = pickAll(['firstname', 'q', 'postalCode', 'active', 'page'], query);
 
   useEffect(() => {
-    if (searchQueries) {
+    if (searchQueries && searchQueries.q) {
       setLoading(true)
       axios.get('/api/v1/siret', {
         params: searchQueries
@@ -77,6 +77,11 @@ const Home = () => {
         </Box>
       ) : (
           <>
+            {ets.length > 0 && (
+              <Box d="flex" my="3" justifyContent="flex-end">
+                <Badge borderRadius="full" fontSize="0.5rem" px="2" colorScheme="blue">total {metadata.total}</Badge>
+              </Box> 
+            )}
             <FPagination
               currentPage={metadata.page}
               total={metadata.total}
@@ -85,18 +90,18 @@ const Home = () => {
               onPrevious={onPreviousPage}
               isLoading={loading}
             />
-            
-          <EtsList establishments={ets} onSelect={handleSelectEts} />
           
-          <FPagination
-            currentPage={metadata.page}
-            total={metadata.total}
-            perPage={metadata.perPage}
-            onNext={onNextPage}
-            onPrevious={onPreviousPage}
-            isLoading={loading}
-          />
-        </>
+            <EtsList establishments={ets} onSelect={handleSelectEts} />
+          
+            <FPagination
+              currentPage={metadata.page}
+              total={metadata.total}
+              perPage={metadata.perPage}
+              onNext={onNextPage}
+              onPrevious={onPreviousPage}
+              isLoading={loading}
+            />
+          </>
       )} 
         </>
       )}
