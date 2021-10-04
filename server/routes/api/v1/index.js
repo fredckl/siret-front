@@ -6,16 +6,11 @@ const qs = require('query-string');
 /* GET home page. */
 router.get('/siret', async function (req, res, next) {
   const { query } = req;
-  // const {
-  //   q,
-  //   firstname,
-  //   postalCode,
-  //   active,
-  //   legalFormCode,
-  //   page,
-  //   perPage
-  // } = query;
-  res.json(await InseeService.getSiret(qs.stringify(query)))
+
+  res.json(await InseeService.getSiret(qs.stringify(query, {
+    skipEmptyString: true,
+    skipNull: true
+  })))
 });
 
 module.exports = router;
