@@ -23,7 +23,7 @@ const FormSearch = ({ onSubmit, isLoading }) => {
       </HStack>
       <HStack spacing="10px">
         <Box d="flex" mt="2">
-          <Text fontSize="sm" pl="1" mr="3">Etat :</Text>
+          <Text fontSize="sm" pl="1" mr="3">Etat administratif :</Text>
           <Controller
             control={control}
             name="active"

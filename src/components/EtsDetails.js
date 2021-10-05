@@ -22,9 +22,7 @@ const EtsDetails = () => {
   useEffect(() => {
     let mounted = true;
     setLoading(true);
-    axios.get('/api/v1/siret', {
-        params: { q: siren, page: 0, perPage: 1000 }
-    }).then(({ data }) => {
+    axios.get(`/api/v1/siret/${siren}`).then(({ data }) => {
         if (mounted) {
           setEts(data.data) 
         }

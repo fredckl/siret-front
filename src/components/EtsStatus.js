@@ -5,7 +5,7 @@ import { Badge, Box } from '@chakra-ui/react';
 const EtsStatus = ({ets}) => {
   return (
     <Box>
-      <Badge borderRadius="full" width="auto" fontSize="0.6rem" px="2" colorScheme={ets.isActive ? 'green' : 'red'}>{ets.isActive ? getStartAt(ets) : getEndAt(ets)} </Badge>
+      <Badge borderRadius="full" width="auto" fontSize="0.6rem" px="2" colorScheme={ets.etsClosed ? 'red' : 'green'}>{ets.etsClosed ? getEndAt(ets) : getStartAt(ets)} </Badge>
     </Box>
   )
 }

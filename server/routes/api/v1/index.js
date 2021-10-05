@@ -13,4 +13,9 @@ router.get('/siret', async function (req, res, next) {
   })))
 });
 
+router.get('/siret/:siren', async function (req, res, next) {
+  const { siren } = req.params;
+  res.json(await InseeService.getSiretBySiren(siren))
+});
+
 module.exports = router;
